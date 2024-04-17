@@ -36,12 +36,12 @@ If you are connecting to a TLS-enabled cluster, you may want to specify the Amaz
 on your connection string. By default, an Amazon RDS Certificate Authority root certificate has been embedded in the 
 JDBC driver JAR file which should work when connecting to Amazon DocumentDB clusters using SSL/TLS encryption. However, 
 if you want to provide a new Amazon RDS Certificate Authority root certificate, follow the directions below:
-1. [Download the root CA certificate](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-root.pem)
+1. [Download the root CA certificate](https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem)
 2. It is recommended to relocate the file to your user's home directory: `$HOME` for Windows or `~` for MacOS/Linux.
 3. Add the `tlsCAFile` option to your [JDBC connection string](connection-string.md). For example: 
    
     ~~~
-    jdbc:documentdb://localhost:27017/<database-name>?tlsAllowInvalidHostnames=true&tlsCAFile=rds-ca-2019-root.pem
+    jdbc:documentdb://localhost:27017/<database-name>?tlsAllowInvalidHostnames=true&tlsCAFile=global-bundle.pem
     ~~~
 
 To determine whether your cluster is TLS-enabled, you can 

@@ -68,7 +68,7 @@ public class DocumentDbConnectionProperties extends Properties {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DocumentDbConnectionProperties.class.getName());
     private static final Pattern WHITE_SPACE_PATTERN = Pattern.compile("^\\s*$");
-    private static final String ROOT_2019_PEM_RESOURCE_FILE_NAME = "/rds-ca-2019-root.pem";
+    private static final String GLOBAL_BUNDLE_PEM_RESOURCE_FILE_NAME = "/global-bundle.pem";
     private static final String ROOT_2021_PEM_RESOURCE_FILE_NAME = "/rds-prod-root-ca-2021.pem";
     public static final String HOME_PATH_PREFIX_REG_EXPR = "^~[/\\\\].*$";
     public static final int FETCH_SIZE_DEFAULT = 2000;
@@ -1431,9 +1431,9 @@ public class DocumentDbConnectionProperties extends Properties {
             }
         }
         // Load embedded CA root certificates.
-        try (InputStream pem2019ResourceAsStream = getClass().getResourceAsStream(ROOT_2019_PEM_RESOURCE_FILE_NAME);
+        try (InputStream globalBundleResourceAsStream = getClass().getResourceAsStream(GLOBAL_BUNDLE_PEM_RESOURCE_FILE_NAME);
              InputStream pem2021ResourceAsStream = getClass().getResourceAsStream(ROOT_2021_PEM_RESOURCE_FILE_NAME)) {
-            caCertificates.addAll(CertificateUtils.loadCertificate(pem2019ResourceAsStream));
+            caCertificates.addAll(CertificateUtils.loadCertificate(globalBundleResourceAsStream));
             caCertificates.addAll(CertificateUtils.loadCertificate(pem2021ResourceAsStream));
         }
     }

@@ -65,7 +65,7 @@ public class DocumentDbConnectionPropertiesTest {
         properties.setTlsAllowInvalidHostnames("true");
         properties.setTlsEnabled("true");
         properties.setRetryReadsEnabled("true");
-        properties.setTlsCAFilePath("src/main/resources/rds-ca-2019-root.pem");
+        properties.setTlsCAFilePath("src/main/resources/global-bundle.pem");
         properties.setSshUser("SSHUSER");
         properties.setSshHostname("SSHHOST");
         properties.setSshPrivateKeyFile("~/.ssh/test-file-name.pem");
@@ -89,7 +89,7 @@ public class DocumentDbConnectionPropertiesTest {
         Assertions.assertTrue(properties.getTlsEnabled());
         Assertions.assertTrue(properties.getTlsAllowInvalidHostnames());
         Assertions.assertTrue(properties.getRetryReadsEnabled());
-        Assertions.assertEquals("src/main/resources/rds-ca-2019-root.pem",
+        Assertions.assertEquals("src/main/resources/global-bundle.pem",
                 properties.getTlsCAFilePath());
         Assertions.assertEquals("SSHUSER", properties.getSshUser());
         Assertions.assertEquals("SSHHOST", properties.getSshHostname());
@@ -109,7 +109,7 @@ public class DocumentDbConnectionPropertiesTest {
                         + "&scanLimit=100"
                         + "&replicaSet=rs0"
                         + "&tlsAllowInvalidHostnames=true"
-                        + "&tlsCAFile=src%2Fmain%2Fresources%2Frds-ca-2019-root.pem"
+                        + "&tlsCAFile=src%2Fmain%2Fresources%2Fglobal-bundle.pem"
                         + "&sshUser=SSHUSER"
                         + "&sshHost=SSHHOST"
                         + "&sshPrivateKeyFile=%7E%2F.ssh%2Ftest-file-name.pem"
@@ -241,7 +241,7 @@ public class DocumentDbConnectionPropertiesTest {
                 "&" + DocumentDbConnectionProperty.REPLICA_SET.getName() + "=" + "rs0" +
                 "&" + DocumentDbConnectionProperty.TLS_ENABLED.getName() + "=" + "true" +
                 "&" + DocumentDbConnectionProperty.TLS_ALLOW_INVALID_HOSTNAMES.getName() + "=" + "true" +
-                "&" + DocumentDbConnectionProperty.TLS_CA_FILE.getName() + "=" + "~/rds-ca-2019-root.pem" +
+                "&" + DocumentDbConnectionProperty.TLS_CA_FILE.getName() + "=" + "~/global-bundle.pem" +
                 "&" + DocumentDbConnectionProperty.LOGIN_TIMEOUT_SEC.getName() + "=" + "4" +
                 "&" + DocumentDbConnectionProperty.RETRY_READS_ENABLED.getName() + "=" + "true" +
                 "&" + DocumentDbConnectionProperty.METADATA_SCAN_METHOD.getName() + "=" + "random" +
@@ -419,11 +419,11 @@ public class DocumentDbConnectionPropertiesTest {
                 .getPropertiesFromConnectionString(info, connectionString, DOCUMENT_DB_SCHEME);
         final List<Certificate> caCertificates = new ArrayList<>();
         properties.appendEmbeddedAndOptionalCaCertificates(caCertificates);
-        Assertions.assertEquals(2, caCertificates.size());
+        Assertions.assertEquals(122, caCertificates.size());
         caCertificates.clear();
-        properties.setTlsCAFilePath("src/main/resources/rds-ca-2019-root.pem");
+        properties.setTlsCAFilePath("src/main/resources/global-bundle.pem");
         properties.appendEmbeddedAndOptionalCaCertificates(caCertificates);
-        Assertions.assertEquals(3, caCertificates.size());
+        Assertions.assertEquals(243, caCertificates.size());
         caCertificates.clear();
         properties.setTlsCAFilePath("invalid-path.pem");
         Assertions.assertThrows(SQLException.class,
@@ -447,7 +447,7 @@ public class DocumentDbConnectionPropertiesTest {
         properties.setTlsAllowInvalidHostnames("true");
         properties.setTlsEnabled("true");
         properties.setRetryReadsEnabled("true");
-        properties.setTlsCAFilePath("src/main/resources/rds-ca-2019-root.pem");
+        properties.setTlsCAFilePath("src/main/resources/global-bundle.pem");
         properties.setSshUser("SSHUSER");
         properties.setSshHostname("SSHHOST");
         properties.setSshPrivateKeyFile("~/.ssh/test-file-name.pem");

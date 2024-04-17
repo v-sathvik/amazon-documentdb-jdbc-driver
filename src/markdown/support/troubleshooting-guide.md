@@ -119,8 +119,8 @@ The online security resources may give a pointer how to fix this.
    See [Specifying the Amazon RDS Certificate Authority Certificate File](../setup/setup.md#specifying-the-amazon-rds-certificate-authority-certificate-file). 
 1. Copy the file to your home directory.
 1. Provide the root certificate file name in the connection. 
-   - Tableau: *TLS Certificate Authority File (Optional)* : `~/rds-ca-2019-root.pem`
-   - DbVisualizer: `jdbc:documentdb://localhost:27017/test?tls=true&tlsAllowInvalidHostnames=true&tlsCAFile=~/rds-ca-2019-root.pem`
+   - Tableau: *TLS Certificate Authority File (Optional)* : `~/global-bundle.pem`
+   - DbVisualizer: `jdbc:documentdb://localhost:27017/test?tls=true&tlsAllowInvalidHostnames=true&tlsCAFile=~/global-bundle.pem`
     
 ### Invalid hostname 
 #### What to look for: 
